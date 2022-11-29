@@ -1,0 +1,4 @@
+gunicorn
+Django
+requests
+django-csp
