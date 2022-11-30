@@ -11,9 +11,9 @@ services:
     env_file:
       - policy/policy_config.env
   nginx:
+    build: ./nginx
     hostname: nginx
     container_name: nginx
-    image: nginx:latest
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
