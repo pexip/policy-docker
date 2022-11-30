@@ -4,8 +4,8 @@ services:
     hostname: policy
     container_name: policy
     image: pexgccacr.azurecr.us/policy:latest
-    ports:
-      - "8000:8000/tcp"
+    expose:
+      - "8000/tcp"
     volumes:
       - ./policy/server/policy.py:/app/server/policy.py
     env_file:
