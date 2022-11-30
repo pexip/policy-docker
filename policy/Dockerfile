@@ -24,7 +24,12 @@ ENV VIRTUAL_ENV /env
 ENV PYTHONPATH /app:/app/server:/app/project:/app/policy
 ENV SECRET_KEY overwrite_in_docker_config
 
-RUN source /env/bin/activate && python manage.py makemigrations && python manage.py migrate && python manage.py createcachetable
+RUN find . -name "*.py" -exec chmod +x {} \; \
+    && find . -name "*.sh" -exec chmod +x {} \; \
+    && source /env/bin/activate \
+    && python manage.py makemigrations \
+    && python manage.py migrate \
+    && python manage.py createcachetable
 
 # start server
 EXPOSE 8000
