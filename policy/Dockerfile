@@ -17,7 +17,7 @@ RUN set -ex \
     && apk add --virtual rundeps $runDeps \
     && apk del .build-deps
 
-ADD policy /app
+ADD django /app
 WORKDIR /app
 
 ENV VIRTUAL_ENV /env
