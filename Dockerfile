@@ -23,7 +23,6 @@ WORKDIR /app
 ENV VIRTUAL_ENV /env
 ENV PYTHONPATH /app:/app/server:/app/project:/app/policy
 ENV SECRET_KEY overwrite_in_docker_config
-ENV HOSTNAME fdqn
 
 RUN source /env/bin/activate && python manage.py makemigrations && python manage.py migrate && python manage.py createcachetable
 

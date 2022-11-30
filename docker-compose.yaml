@@ -9,7 +9,7 @@ services:
     volumes:
       - ./policy/server/policy.py:/app/server/policy.py
     env_file:
-      - config.env
+      - policy_config.env
   nginx:
     hostname: nginx
     container_name: nginx
@@ -21,4 +21,4 @@ services:
       - ./policy.conf.template:/etc/nginx/templates/policy.conf.template
       - /etc/letsencrypt:/etc/letsencrypt
     env_file:
-      - config.env
+      - nginx_config.env
