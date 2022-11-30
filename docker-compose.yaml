@@ -18,7 +18,6 @@ services:
       - "80:80/tcp"
       - "443:443/tcp"
     volumes:
-      - ./nginx/policy.conf.template:/etc/nginx/templates/policy.conf.template
       - /etc/letsencrypt:/etc/letsencrypt
     env_file:
       - nginx/nginx_config.env
