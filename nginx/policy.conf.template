@@ -22,15 +22,14 @@ server {
 }
 
 server {
-  location /.well-known/acme-challenge/ {
+  location ^~ /.well-known/acme-challenge/ {
       root /var/www/certbot/${HOSTNAME};
   }
 
-  if ($host = ${HOSTNAME}) {
+  location / {
       return 301 https://$host$request_uri;
   } # managed by Certbot
 
   server_name               .${HOSTNAME};
   listen                    80;
-    return 404; # managed by Certbot
 }
