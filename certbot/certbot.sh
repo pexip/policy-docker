@@ -19,6 +19,7 @@ if [ "$CERTBOT_TEST_CERT" != "0" ]; then
 fi
 
 domains_fixed=$(echo "$HOSTNAME" | tr -d \")
+echo "$domains_fixed"
 domain_list=($domains_fixed)
 emails_fixed=$(echo "$CERTBOT_EMAIL" | tr -d \")
 emails_list=($emails_fixed)
@@ -41,6 +42,8 @@ for i in "${!domain_list[@]}"; do
     echo "Obtaining the certificate for $domain with email $email"
   fi
 
+  echo "webroot /var/www/certbot/$domain"
+  
   certbot certonly \
     --webroot \
     -w "/var/www/certbot/$domain" \

@@ -67,4 +67,4 @@ for domain in $domains_fixed; do
   fi
 done
 
-./docker-entrypoint.sh exec nginx -g "daemon off;"
+./docker-entrypoint.sh nginx -g "daemon off;"

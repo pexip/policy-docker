@@ -22,13 +22,13 @@ server {
 }
 
 server {
-  if ($host = ${HOSTNAME}) {
-      return 301 https://$host$request_uri;
-  } # managed by Certbot
-
   location /.well-known/acme-challenge/ {
       root /var/www/certbot/${HOSTNAME};
   }
+
+  if ($host = ${HOSTNAME}) {
+      return 301 https://$host$request_uri;
+  } # managed by Certbot
 
   server_name               .${HOSTNAME};
   listen                    80;
