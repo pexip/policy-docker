@@ -27,7 +27,7 @@ server {
   } # managed by Certbot
 
   location /.well-known/acme-challenge/ {
-      root /var/www/certbot;
+      root /var/www/certbot/${HOSTNAME};
   }
 
   server_name               .${HOSTNAME};
