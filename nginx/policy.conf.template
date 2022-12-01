@@ -17,14 +17,18 @@ server {
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/${HOSTNAME}/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/${HOSTNAME}/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+    include /etc/nginx/ssl/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/nginx/ssl/ssl-dhparams.pem;
 }
 
 server {
-    if ($host = ${HOSTNAME}) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
+  if ($host = ${HOSTNAME}) {
+      return 301 https://$host$request_uri;
+  } # managed by Certbot
+
+  location /.well-known/acme-challenge/ {
+      root /var/www/certbot;
+  }
 
   server_name               .${HOSTNAME};
   listen                    80;
