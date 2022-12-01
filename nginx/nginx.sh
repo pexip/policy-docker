@@ -32,6 +32,7 @@ wait_for_lets_encrypt() {
     sleep 5s & wait ${!}
   done
   use_lets_encrypt_certificate "$1"
+  /docker-entrypoint.d/20-envsubst-on-templates.sh
   reload_nginx
 }
 
@@ -61,9 +62,11 @@ for domain in $domains_fixed; do
 
   if [ ! -d "/etc/letsencrypt/live/$domain" ]; then
     use_dummy_certificate "$domain"
+    /docker-entrypoint.d/20-envsubst-on-templates.sh
     wait_for_lets_encrypt "$domain" &
   else
     use_lets_encrypt_certificate "$domain"
+    /docker-entrypoint.d/20-envsubst-on-templates.sh
   fi
 done
 
