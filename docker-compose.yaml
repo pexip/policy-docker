@@ -9,7 +9,7 @@ services:
     volumes:
       - ./policy.py:/app/server/policy.py
     env_file:
-      - policy/policy_config.env
+      - config.env
   nginx:
     build: ./nginx
     hostname: nginx
@@ -18,6 +18,21 @@ services:
       - "80:80/tcp"
       - "443:443/tcp"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
+      - certs:/etc/letsencrypt
+      - certbot_acme_challenge:/var/www/certbot
     env_file:
-      - nginx/nginx_config.env
+      - config.env
+  certbot:
+    build: ./certbot
+    hostname: certbot
+    container_name: certbot
+    volumes:
+      - certs:/etc/letsencrypt
+      - certbot_acme_challenge:/var/www/certbot
+    env_file:
+      - config.env
+
+volumes:
+  certs:
+    external: true
+  certbot_acme_challenge:
