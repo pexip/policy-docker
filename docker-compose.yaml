@@ -31,6 +31,16 @@ services:
       - certbot_acme_challenge:/var/www/certbot
     env_file:
       - config.env
+  cron:
+    build: ./cron
+    hostname: cron
+    container_name: cron
+    environment:
+      COMPOSE_PROJECT_NAME: "${COMPOSE_PROJECT_NAME}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workdir:ro
+    restart: unless-stopped
 
 volumes:
   certs:
