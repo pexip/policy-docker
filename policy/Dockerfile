@@ -22,9 +22,9 @@ WORKDIR /app
 
 ENV VIRTUAL_ENV /env
 ENV PYTHONPATH /app:/app/server:/app/project:/app/policy
-#ENV SECRET_KEY overwrite_in_docker_config
-RUN SECRET_KEY=`python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'` \
-    && export SECRET_KEY
+
+RUN source /env/bin/activate \
+    && python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())' > secret.env
 
 RUN find . -name "*.py" -exec chmod +x {} \; \
     && find . -name "*.sh" -exec chmod +x {} \; \
