@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    SECRET_KEY = os.environ["SECRET_KEY"]
+    with open("/app/secret.env", "r", encoding="utf-8") as f:
+        SECRET_KEY = f.readline().strip()
+
 except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY in environment") from e
 
