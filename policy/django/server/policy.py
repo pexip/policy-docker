@@ -2,6 +2,7 @@ import requests
 import json
 import re
 import logging
+import base64
 
 
 def service_config(request):
@@ -40,8 +41,8 @@ def avatar(request, alias):
     call_info = request.GET.dict()
     logging.info(call_info)
 
-    with open("blank.jpg", "rb") as f:
-        policy_response = f.read()
+    with open("/app/server/blank.jpg", "rb") as f:
+        policy_response = base64.b64encode(f.read()).decode()
 
     logging.info(policy_response)
 
