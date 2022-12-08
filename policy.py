@@ -34,7 +34,7 @@ def location(request):
     return policy_response
 
 
-def avatar(request):
+def avatar(request, alias):
     call_info = request.GET.dict()
     logging.info(call_info)
 
@@ -45,14 +45,29 @@ def avatar(request):
     return policy_response
 
 
-def reg(request):
+def directory(request):
     call_info = request.GET.dict()
     logging.info(call_info)
 
     policy_response = {
         "status": "success",
         "action": "continue",
-        "type": "registrations",
+        "type": "directory",
+    }
+
+    logging.info(policy_response)
+
+    return policy_response
+
+
+def registration(request, alias):
+    call_info = request.GET.dict()
+    logging.info(call_info)
+
+    policy_response = {
+        "status": "success",
+        "action": "continue",
+        "type": "registration",
     }
 
     logging.info(policy_response)

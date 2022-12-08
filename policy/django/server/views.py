@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 import json
 import logging
-from .policy import service_config, location, avatar, reg
+from .policy import service_config, location, avatar, directory, registration
 
 
 def service_configuration(request):
@@ -22,17 +22,30 @@ def participant_location(request):
     return response
 
 
-def participant_avatar(request):
+def participant_avatar(request, alias):
     logging.info(request)
+    logging.info(alias)
     response = HttpResponse(
-        json.dumps(avatar(request)), content_type="application/json"
+        json.dumps(avatar(request, alias)), content_type="application/json"
     )
 
     return response
 
 
-def registrations(request):
+def registration_directory(request):
     logging.info(request)
-    response = HttpResponse(json.dumps(reg(request)), content_type="application/json")
+    response = HttpResponse(
+        json.dumps(directory(request)), content_type="application/json"
+    )
+
+    return response
+
+
+def registration_alias(request, alias):
+    logging.info(request)
+    logging.info(alias)
+    response = HttpResponse(
+        json.dumps(registration(request, alias)), content_type="application/json"
+    )
 
     return response
