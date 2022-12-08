@@ -26,7 +26,7 @@ def participant_avatar(request, alias):
     logging.info(request)
     logging.info(alias)
     response = HttpResponse(
-        json.dumps(avatar(request, alias)), content_type="application/json"
+        json.dumps(avatar(request, alias)), content_type="image/jpeg"
     )
 
     return response

@@ -25,7 +25,9 @@ def location(request):
 
     policy_response = {
         "status": "success",
-        "action": "continue",
+        "result": {
+            "location": "non_existent_location_to_force_fallback",
+        },
         "type": "media_location",
     }
 
@@ -38,7 +40,8 @@ def avatar(request, alias):
     call_info = request.GET.dict()
     logging.info(call_info)
 
-    policy_response = {"status": "success", "action": "continue", "type": "avatar"}
+    with open("blank.jpg", "rb") as f:
+        policy_response = f.read()
 
     logging.info(policy_response)
 
@@ -51,7 +54,7 @@ def directory(request):
 
     policy_response = {
         "status": "success",
-        "action": "continue",
+        "result": [],
         "type": "directory",
     }
 
@@ -67,6 +70,7 @@ def registration(request, alias):
     policy_response = {
         "status": "success",
         "action": "continue",
+        "result": {},
         "type": "registration",
     }
 
