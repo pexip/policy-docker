@@ -41,7 +41,7 @@ def avatar(request, alias):
     call_info = request.GET.dict()
     logging.info(call_info)
 
-    with open("/app/server/blank.jpg", "rb") as f:
+    with open("/app/server/pexip.jpg", "rb") as f:
         policy_response = base64.b64encode(f.read()).decode()
 
     logging.info(policy_response)
