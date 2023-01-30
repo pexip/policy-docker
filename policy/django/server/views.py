@@ -25,10 +25,13 @@ def participant_location(request):
 def participant_avatar(request, alias):
     logging.info(request)
     logging.info(alias)
+    with open(avatar(request, alias)):
+        data = f.read()
     response = HttpResponse(
-        json.dumps(avatar(request, alias)), content_type="image/jpeg"
+        data, content_type="image/jpeg"
     )
-
+    response['Content-Disposition'] = 'attachment; filename="avatar.jpg"'
+    
     return response
 
 
